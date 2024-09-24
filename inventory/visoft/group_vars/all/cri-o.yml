@@ -7,3 +7,19 @@
 #   - registry: 10.0.0.2:5000
 #     username: user
 #     password: pass
+
+crio_registries:
+  - prefix: docker.io
+    insecure: false
+    blocked: false
+    location: registry-1.docker.io
+    unqualified: false
+    mirrors:
+      - location: mirror.gcr.io
+        insecure: false
+  - prefix: quay.io
+    insecure: false
+    blocked: false
+    location: quay.io
+    unqualified: false
+    mirrors: []
