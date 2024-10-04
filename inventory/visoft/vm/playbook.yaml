@@ -1,0 +1,57 @@
+- name: update & install
+  hosts: all
+  become: true
+
+  vars:
+    packages:
+      - python3-devel
+      - python3-packaging
+      - python3-kubernetes
+      - kubernetes-client
+      - helm
+    modules:
+      - ipython
+
+  tasks:
+    - name: upgrade all packages
+      ansible.builtin.dnf:
+        name: "*"
+        state: latest
+
+    - name: install packages
+      ansible.builtin.dnf:
+        name: "{{ packages }}"
+        state: latest
+
+    - name: install python modules
+      ansible.builtin.pip:
+        name: "{{ modules }}"
+        state: present
+
+    - name: reboot
+      ansible.builtin.reboot:
+
+- name: create user
+  hosts: all
+  become: true
+
+  vars:
+    username: neo
+    pubkeypath: ./neo-id.pub
+
+  tasks:
+    - name: add new user
+      ansible.builtin.user:
+        append: true
+        groups:
+          - wheel
+        create_home: true
+        name: "{{ username }}"
+        shell: /bin/bash
+        state: present
+
+    - name: Set authorized key taken from file
+      ansible.posix.authorized_key:
+        key: "{{ lookup('file', pubkeypath) }}"
+        state: present
+        user: "{{ username }}"
