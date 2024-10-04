@@ -1,5 +1,7 @@
 all:
   hosts:
+    cluster:
+      ansible_host: 10.4.4.125
     node1:
       ansible_host: 10.4.4.111
       ip: 10.4.4.111

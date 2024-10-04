@@ -1,0 +1,3 @@
+---
+- name: Install TopoLVM
+  ansible.builtin.import_playbook: playbooks/topolvm.yaml
