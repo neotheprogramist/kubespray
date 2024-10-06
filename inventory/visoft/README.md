@@ -1,0 +1,5 @@
+- `ansible-playbook -i inventory/visoft/hosts.yaml --become cluster.yml`
+- `ansible-playbook -e @inventory/visoft/secrets.yaml -i inventory/visoft/hosts.yaml --become inventory/visoft/provision.yaml`
+- `ansible-playbook -i inventory/visoft/hosts.yaml --become reset.yml`
+- `sudo vgcreate vg0 /dev/vdb /dev/vdc /dev/vdd`
+- `sudo vgdisplay`
