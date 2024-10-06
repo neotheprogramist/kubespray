@@ -104,6 +104,9 @@ target/
 # dotenv
 .env
 
+# secrets
+secrets.yaml
+
 # virtualenv
 venv/
 ENV/

@@ -5,7 +5,6 @@
   vars:
     packages:
       - python3-devel
-      - python3-packaging
       - python3-kubernetes
       - kubernetes-client
       - helm

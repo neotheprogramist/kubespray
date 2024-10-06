@@ -1,0 +1,18 @@
+---
+- name: Setup Gateway API
+  hosts: cluster
+
+  tasks:
+    - name: Install Gateway API Resources
+      kubernetes.core.k8s:
+        definition: "{{ lookup('kubernetes.core.kustomize', dir='https://github.com/nginxinc/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v1.4.0') }}"
+
+    - name: Install NGINX Gateway Fabric Helm chart
+      kubernetes.core.helm:
+        name: nginx-gateway
+        namespace: nginx-gateway
+        chart_ref: oci://ghcr.io/nginxinc/charts/nginx-gateway-fabric
+        atomic: true
+        create_namespace: true
+        wait: true
+        values: "{{ lookup('file', '../resources/values/gateway.yaml') | from_yaml }}"
