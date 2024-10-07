@@ -154,7 +154,7 @@ service:
   externalTrafficPolicy: Local
   # -- The annotations of the NGINX Gateway Fabric service.
   annotations:
-    kube-vip.io/loadbalancerIPs: 10.4.4.130
+    kube-vip.io/loadbalancerIPs: 10.4.4.170
 
   # -- A list of ports to expose through the NGINX Gateway Fabric service. Update it to match the listener ports from
   # your Gateway resource. Follows the conventional Kubernetes yaml syntax for service ports.
