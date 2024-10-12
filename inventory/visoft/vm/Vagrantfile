@@ -1,0 +1,24 @@
+Vagrant.configure("2") do |config|
+  config.vm.define :workhorse do |workhorse|
+    workhorse.vm.hostname = "visoft-workhorse"
+    workhorse.vm.box = "fedora/40-cloud-base"
+    workhorse.vm.box_version = "40.20240414.0"
+
+    workhorse.vm.provider :libvirt do |libvirt|
+      libvirt.storage_pool_name = "default"
+      libvirt.management_network_mode = "none"
+      libvirt.driver = "kvm"
+      libvirt.uri = "qemu:///system"
+      libvirt.memory = 114688
+      libvirt.cpu_mode = "host-passthrough"
+      libvirt.cpus = 60
+      libvirt.cputopology sockets: "1", cores: "30", threads: "2"
+    end
+
+    workhorse.vm.network "public_network", dev: "bridge0", mode: "bridge", type: "bridge", mac: "52:54:00:19:63:3D"
+
+    workhorse.vm.provision "ansible" do |ansible|
+      ansible.playbook = "playbook.yaml"
+    end
+  end
+end

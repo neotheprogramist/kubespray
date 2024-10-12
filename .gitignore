@@ -28,6 +28,7 @@ plugins/mitogen
 inventory/*
 !inventory/local
 !inventory/sample
+!inventory/visoft
 inventory/*/artifacts/
 
 # Byte-compiled / optimized / DLL files
@@ -103,9 +104,13 @@ target/
 # dotenv
 .env
 
+# secrets
+secrets.yaml
+
 # virtualenv
 venv/
 ENV/
+.venv/
 
 # molecule
 roles/**/molecule/**/__pycache__/
