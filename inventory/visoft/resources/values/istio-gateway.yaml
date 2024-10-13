@@ -56,7 +56,7 @@ defaults:
       protocol: TCP
       targetPort: 443
     annotations: {}
-    loadBalancerIP: ""
+    loadBalancerIP: 10.3.3.32
     loadBalancerSourceRanges: []
     externalTrafficPolicy: ""
     externalIPs: []

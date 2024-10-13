@@ -1,8 +1,0 @@
----
-- name: Setup Gateway API Resources
-  hosts: cluster
-
-  tasks:
-    - name: Install Gateway API Resources
-      kubernetes.core.k8s:
-        definition: "{{ lookup('kubernetes.core.kustomize', dir='https://github.com/nginxinc/nginx-gateway-fabric/config/crd/gateway-api/standard?ref=v1.4.0') }}"
