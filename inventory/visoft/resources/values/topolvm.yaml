@@ -138,7 +138,7 @@ lvmd:
   deviceClasses:
     - name: nvme0
       volume-group: vgnvme0
-      default: true
+      default: false
       spare-gb: 10
     - name: hdd0
       volume-group: vghdd0
@@ -670,7 +670,26 @@ livenessProbe:
 # storageClasses -- Whether to create storageclass(es)
 # ref: https://kubernetes.io/docs/concepts/storage/storage-classes/
 storageClasses:
-  - name: topolvm-provisioner  # Defines name of storage class.
+  - name: nvme  # Defines name of storage class.
+    storageClass:
+      # Supported filesystems are: ext4, xfs, and btrfs.
+      fsType: xfs
+      # reclaimPolicy
+      reclaimPolicy:  # Delete
+      # Additional annotations
+      annotations: {}
+      # Default storage class for dynamic volume provisioning
+      # ref: https://kubernetes.io/docs/concepts/storage/dynamic-provisioning
+      isDefaultClass: true
+      # volumeBindingMode can be either WaitForFirstConsumer or Immediate. WaitForFirstConsumer is recommended because TopoLVM cannot schedule pods wisely if volumeBindingMode is Immediate.
+      volumeBindingMode: WaitForFirstConsumer
+      # enables CSI drivers to expand volumes. This feature is available for Kubernetes 1.16 and later releases.
+      allowVolumeExpansion: true
+      additionalParameters:
+        topolvm.io/device-class: nvme0
+      # mount options
+      mountOptions: []
+  - name: hdd  # Defines name of storage class.
     storageClass:
       # Supported filesystems are: ext4, xfs, and btrfs.
       fsType: xfs
@@ -685,8 +704,8 @@ storageClasses:
       volumeBindingMode: WaitForFirstConsumer
       # enables CSI drivers to expand volumes. This feature is available for Kubernetes 1.16 and later releases.
       allowVolumeExpansion: true
-      additionalParameters: {}
-      # "topolvm.io/device-class": "ssd"
+      additionalParameters:
+        topolvm.io/device-class: hdd0
       # mount options
       mountOptions: []
 
