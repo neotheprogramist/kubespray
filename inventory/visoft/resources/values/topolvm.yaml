@@ -136,9 +136,13 @@ lvmd:
 
   # lvmd.deviceClasses -- Specify the device-class settings.
   deviceClasses:
-    - name: ssd
-      volume-group: vg0
+    - name: nvme0
+      volume-group: vgnvme0
       default: true
+      spare-gb: 10
+    - name: hdd0
+      volume-group: vghdd0
+      default: false
       spare-gb: 10
 
   # lvmd.lvcreateOptionClasses -- Specify the lvcreate-option-class settings.

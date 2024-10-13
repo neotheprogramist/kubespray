@@ -5,5 +5,5 @@
 - name: Install TopoLVM
   ansible.builtin.import_playbook: playbooks/topolvm.yaml
 
-- name: Install NGINX Gateway Fabric
-  ansible.builtin.import_playbook: playbooks/gateway.yaml
+- name: Install Istio
+  ansible.builtin.import_playbook: playbooks/istio.yaml
