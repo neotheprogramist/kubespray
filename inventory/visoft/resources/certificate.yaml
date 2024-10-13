@@ -1,0 +1,18 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: wildcard-visoft-dev
+spec:
+  secretName: wildcard-visoft-dev-tls
+  duration: 2160h
+  renewBefore: 360h
+  subject:
+    organizations:
+      - visoft.dev
+  privateKey:
+    algorithm: ECDSA
+  dnsNames:
+    - "*.visoft.dev"
+  issuerRef:
+    name: visoft-dev-dns01
+    kind: Issuer

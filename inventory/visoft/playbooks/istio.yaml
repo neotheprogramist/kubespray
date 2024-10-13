@@ -31,18 +31,3 @@
         atomic: true
         wait: true
         values: "{{ lookup('file', '../resources/values/istio-istiod.yaml') | from_yaml }}"
-
-    - name: Create Istio Gateway namespace
-      kubernetes.core.k8s:
-        name: istio-gateway
-        kind: Namespace
-
-    - name: Install Istio Gateway
-      kubernetes.core.helm:
-        name: istio-gateway
-        namespace: istio-gateway
-        chart_ref: gateway
-        chart_repo_url: https://istio-release.storage.googleapis.com/charts
-        atomic: true
-        wait: true
-        values: "{{ lookup('file', '../resources/values/istio-gateway.yaml') | from_yaml }}"

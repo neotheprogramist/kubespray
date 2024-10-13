@@ -1,0 +1,9 @@
+---
+- name: Setup Kubevip
+  hosts: cluster
+
+  tasks:
+    - name: Create Kubevip Config
+      kubernetes.core.k8s:
+        namespace: kube-system
+        definition: "{{ lookup('file', '../resources/kubevip.yaml') }}"

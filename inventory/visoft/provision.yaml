@@ -1,9 +1,12 @@
 ---
-- name: Install Cert Manager
-  ansible.builtin.import_playbook: playbooks/cert-manager.yaml
+- name: Configure Kubevip
+  ansible.builtin.import_playbook: playbooks/kubevip.yaml
 
 - name: Install TopoLVM
   ansible.builtin.import_playbook: playbooks/topolvm.yaml
 
 - name: Install Istio
   ansible.builtin.import_playbook: playbooks/istio.yaml
+
+- name: Configure Gateway
+  ansible.builtin.import_playbook: playbooks/gateway.yaml

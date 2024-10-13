@@ -1,12 +1,12 @@
 apiVersion: cert-manager.io/v1
-kind: ClusterIssuer
+kind: Issuer
 metadata:
   name: visoft-dev-dns01
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
     privateKeySecretRef:
-      name: issuer-account-key
+      name: visoft-dev-dns01-account-key
     solvers:
       - dns01:
           cloudflare:
